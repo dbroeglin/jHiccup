@@ -7,14 +7,21 @@
 
 package org.jhiccup;
 
-import org.HdrHistogram.*;
-
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
+import java.lang.management.ManagementFactory;
 import java.text.SimpleDateFormat;
-import java.lang.management.*;
-import java.util.concurrent.Semaphore;
+import java.util.Date;
+import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
+
+import javax.swing.filechooser.FileSystemView;
+
+import org.HdrHistogram.Histogram;
+import org.HdrHistogram.HistogramLogWriter;
+import org.HdrHistogram.SingleWriterRecorder;
 
 /**
  * HiccupMeter is a platform pause measurement tool, it is meant to observe
@@ -444,10 +451,9 @@ public class HiccupMeter extends Thread {
                     final long timeBeforeMeasurement = System.nanoTime();
                     if (config.resolutionMs != 0) {
                         TimeUnit.NANOSECONDS.sleep(resolutionNsec);
-                        if (allocateObjects) {
                             // Allocate an object to make sure potential allocation stalls are measured.
-                            lastSleepTimeObj = new Long(timeBeforeMeasurement);
-                        }
+                            //lastSleepTimeObj = new Long(timeBeforeMeasurement);
+                        	new File("e:/projects/jboss/jdks").exists();
                     }
                     final long timeAfterMeasurement = System.nanoTime();
                     final long deltaTimeNsec = timeAfterMeasurement - timeBeforeMeasurement;
